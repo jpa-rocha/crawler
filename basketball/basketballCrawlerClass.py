@@ -9,6 +9,14 @@ class BasketballCrawler(Crawler):
 		self.teams_path = "basketball/teams/"
 	
 		
+	def crawl_data(self, league, year):
+		links = self.find_data(league, year)
+		if league == "nba":
+			teams = full_teams.nba_teams
+		for team in teams:
+			if league == "nba":
+				self.create_folder(self.teams_path + "nba_" + team[0])
+
 	def find_data(self, league, year):
 		path = ""
 		if league == "nba":
@@ -23,7 +31,5 @@ class BasketballCrawler(Crawler):
 				for team in teams:
 					if path + team[0]  + "/" + year in link.get("href"):
 						links.add(link.get("href"))
-		for team in teams:
-			if league == "nba":
-				self.create_folder(self.teams_path + "nba_" + team[0])
-			
+
+		return links

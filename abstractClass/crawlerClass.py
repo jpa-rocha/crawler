@@ -36,6 +36,14 @@ class Crawler(ABC):
 		else:
 			print(f"Folder {name} already exists.")
 
+
+	def navigate(self, url):
+		if self.check_url(url) == True:
+			check = request.urlopen(self.url + url).read()
+			return check
+		else:
+			return False
+
 	@abstractmethod
 	def find_data(self):
 		pass
