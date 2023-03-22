@@ -7,6 +7,8 @@ from urllib import (
 	request
 )
 
+import os
+
 class Crawler(ABC):
 	def __init__(self, url):
 		self.url = url
@@ -25,6 +27,14 @@ class Crawler(ABC):
 			return check
 		else:
 			return False
+
+
+	def create_folder(self, name):
+		if not os.path.exists(name):
+			os.makedirs(name)
+			print(f"Folder {name} created.")
+		else:
+			print(f"Folder {name} already exists.")
 
 	@abstractmethod
 	def find_data(self):
